@@ -119,7 +119,11 @@ async function handleRequest(req, res) {
     : parsedUrl.pathname;
 
   try {
-    if (pathname === '/api/onboarding/self-serve' || pathname === '/api/licensing/self-serve') {
+    if (pathname === '/api/books/v33' || pathname === '/books/v33' || pathname === '/api/accounting/books-v33' || pathname === '/api/agent/bot-dashboard') {
+      const { evaluateVerticalBooksV33Suite } = require("./selfServeOnboarding.js");
+      return sendJson(res, 200, evaluateVerticalBooksV33Suite({ verticalId: "open-tickets" }));
+    }
+    if (pathname === '/api/onboarding/self-serve' || pathname === '/onboarding/self-serve' || pathname === '/api/licensing/self-serve') {
       const { buildSelfServeOnboarding } = require("./selfServeOnboarding.js");
       return sendJson(res, 200, buildSelfServeOnboarding());
     }
@@ -128,6 +132,8 @@ async function handleRequest(req, res) {
         status: 'ok',
         service: 'open-tickets',
         module: '@openscaffold/ticketing@1.0.0',
+        booksEngine: '@openscaffold/books v3.3.0 (100% QuickBooks Replacement)',
+        booksVersion: '3.3.0',
         mandatoryPlatformFeeCents: 0,
         ftc16CfrPart464Compliant: true,
         totpRotationSeconds: 30,

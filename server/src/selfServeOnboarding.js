@@ -1,4 +1,5 @@
 "use strict";
+const { BOOKS_V33_ENGINE_LABEL, BOOKS_V33_VERSION, evaluateVerticalBooksV33Suite } = require("./booksV33VerticalEngine.js");
 const BASE = {
   "ok": true,
   "vertical": "open-tickets",
@@ -31,9 +32,24 @@ const BASE = {
   }
 };
 function buildSelfServeOnboarding(input = {}) {
+  const organizationName = input.organizationName || BASE.organizationName;
+  const booksV33 = evaluateVerticalBooksV33Suite({
+    verticalId: "open-tickets",
+    organizationName,
+    rolePersona: input.rolePersona || "cfo_treasurer_cpa",
+    period: input.period || "2026-10",
+  });
   return {
     ...BASE,
-    organizationName: input.organizationName || BASE.organizationName,
+    organizationName,
+    booksEngine: BOOKS_V33_ENGINE_LABEL,
+    booksVersion: BOOKS_V33_VERSION,
+    booksV33,
   };
 }
-module.exports = { buildSelfServeOnboarding };
+module.exports = {
+  buildSelfServeOnboarding,
+  evaluateVerticalBooksV33Suite,
+  BOOKS_V33_ENGINE_LABEL,
+  BOOKS_V33_VERSION,
+};
