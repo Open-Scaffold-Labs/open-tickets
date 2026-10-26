@@ -119,6 +119,10 @@ async function handleRequest(req, res) {
     : parsedUrl.pathname;
 
   try {
+    if (pathname === '/api/onboarding/self-serve' || pathname === '/api/licensing/self-serve') {
+      const { buildSelfServeOnboarding } = require("./selfServeOnboarding.js");
+      return sendJson(res, 200, buildSelfServeOnboarding());
+    }
     if (pathname === '/health' || pathname === '/api/health') {
       return sendJson(res, 200, {
         status: 'ok',
