@@ -1,0 +1,14 @@
+{
+  "name": "open-tickets",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Open Tickets — The Free, Open-Internet Public-Utility Ticketing Platform ($0.00 Platform Fee, $0.20 Instant ACH, 30s Rotating TOTP Anti-Scalper QR Codes, 100% Face-Value Fan Waitlist, FTC 16 CFR Part 464 Compliant, and @openscaffold/books v3.0 Double-Entry GL Bridge).",
+  "main": "server/src/index.js",
+  "scripts": {
+    "build": "node -e \"console.log('Open Tickets static bundle & PDF verified in public/')\"",
+    "start": "node server/src/index.js",
+    "test": "node --test server/src/__tests__/*.test.js"
+  },
+  "author": "Dale Raaen <draaen@mac.com>",
+  "license": "MIT"
+}

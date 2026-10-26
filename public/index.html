@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Tickets — The Free, Open-Internet Public-Utility Ticketing Platform ($0.00 Fee)</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Top Operational Header -->
+  <header class="top-header">
+    <div class="brand-cluster">
+      <div class="brand-logo">OT</div>
+      <div>
+        <div class="brand-title">
+          Open Tickets
+          <span class="badge-zero-fee">$0.00 PLATFORM FEE FOREVER</span>
+          <span class="badge-zero-fee" style="background: rgba(59,130,246,0.15); color:#93c5fd; border-color:rgba(59,130,246,0.4);">FTC 16 CFR PART 464 COMPLIANT</span>
+        </div>
+        <div class="brand-subtitle">
+          Open-Internet Public-Utility Ticketing · $0.20 Instant ACH · 30s Rotating TOTP Anti-Scalper QR · 100% Face-Value Waitlist · @openscaffold/books v3.0 GL
+        </div>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn" id="btnTourModal">❓ How Open Tickets Works (4-Step Tour)</button>
+      <button class="btn btn-blue" id="btnAiDrawer">✨ Ask Open Tickets AI</button>
+      <button class="btn" id="btnMcpDrawer">🔌 Connect Grok Bot / Federation</button>
+      <a class="btn btn-emerald" href="/Open_Tickets_Free_Internet_Ticketing_Blueprint.pdf" target="_blank" rel="noopener">
+        ⬇️ Download Blueprint PDF
+      </a>
+    </div>
+  </header>
+
+  <div class="workspace-shell">
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div class="nav-section-label">Public-Utility Workbench</div>
+        <div class="nav-list">
+          <button class="nav-btn active" data-view="view-checkout">
+            <span class="nav-icon">🎟️</span>
+            <span>
+              <span class="nav-text-title">1. Fan Checkout &amp; Seat Map</span>
+              <span class="nav-text-sub">SVG Seat Picker &amp; Junk-Fee Slayer Receipt</span>
+            </span>
+          </button>
+
+          <button class="nav-btn" data-view="view-wallet">
+            <span class="nav-icon">🔐</span>
+            <span>
+              <span class="nav-text-title">2. Rotating TOTP QR &amp; Waitlist</span>
+              <span class="nav-text-sub">30s Anti-Scalper QR &amp; 100% Face-Value Return</span>
+            </span>
+          </button>
+
+          <button class="nav-btn" data-view="view-creator">
+            <span class="nav-icon">🏟️</span>
+            <span>
+              <span class="nav-text-title">3. 60-Sec Venue Event Creator</span>
+              <span class="nav-text-sub">Launch Event + @openscaffold/books GL Bridge</span>
+            </span>
+          </button>
+
+          <button class="nav-btn" data-view="view-blueprint">
+            <span class="nav-icon">🌐</span>
+            <span>
+              <span class="nav-text-title">4. How the Internet Sustains It</span>
+              <span class="nav-text-sub">Wikipedia/Signal Commons Math &amp; Antitrust</span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="covenant-box">
+        <h4>🛡️ Public-Utility Covenant</h4>
+        <ul class="covenant-list">
+          <li>• <strong>$0.00</strong> Mandatory Ticketing Fee</li>
+          <li>• <strong>$0.20</strong> Flat Instant Bank ACH Rail</li>
+          <li>• <strong>100%</strong> Max Resale Cap (Zero Scalpers)</li>
+          <li>• <strong>30-Sec</strong> Rotating HMAC-SHA256 QR</li>
+          <li>• <strong>Daily</strong> Direct Mode A0 Artist Payout</li>
+          <li>• <strong>$0.00038</strong> Edge Compute / Ticket</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Operational Views -->
+    <main class="main-content">
+      <!-- VIEW 1: INTERACTIVE FAN CHECKOUT & JUNK-FEE SLAYER SIMULATOR -->
+      <section class="view-section active" id="view-checkout">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">Interactive Fan Checkout, SVG Venue Seat Map &amp; Junk-Fee Slayer</h1>
+            <p class="view-subtitle">
+              Effortless 1-click checkout with upfront all-in pricing (FTC 16 C.F.R. Part 464). Pick any concert, high school championship, restaurant wine dinner, golf tournament, or firehouse benefit below, click seats on the interactive map, and compare the live receipt against Ticketmaster.
+            </p>
+          </div>
+        </div>
+
+        <!-- Top KPI Strip -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Open Tickets Platform Fee</div>
+            <div class="kpi-value" style="color: var(--emerald);">$0.00</div>
+            <div class="kpi-sub">Forever free public utility across all events</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Wholesale Payment Rail</div>
+            <div class="kpi-value" id="kpiRailFee">$0.20</div>
+            <div class="kpi-sub" id="kpiRailLabel">Flat Instant Bank ACH / FedNow per order</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Fan Junk-Fee Savings (This Order)</div>
+            <div class="kpi-value" style="color: #34d399;" id="kpiSavedOrder">$67.30</div>
+            <div class="kpi-sub" id="kpiReductionPct">99.7% lower fees than Ticketmaster</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Artist / Venue Settlement</div>
+            <div class="kpi-value" style="color: #93c5fd;" id="kpiVenuePayout">$170.00</div>
+            <div class="kpi-sub">100% Direct Daily Payout (Zero OSL Float)</div>
+          </div>
+        </div>
+
+        <!-- Event Selector Cards -->
+        <div class="panel-card">
+          <div class="panel-title">
+            <span>Step 1 · Select a Live Event (Concerts, Sports, Theater &amp; OSL Vertical Apps)</span>
+            <span class="badge-zero-fee" id="activeEventVerticalBadge">OpenTickets Standalone</span>
+          </div>
+          <div class="event-selector-grid" id="eventSelectorGrid"></div>
+        </div>
+
+        <div class="two-col-grid">
+          <!-- Left Column: Interactive SVG Venue Seat Map & Section Picker -->
+          <div class="panel-card">
+            <div class="panel-title">
+              <span id="seatmapEventTitle">Interactive Venue Seat Map</span>
+              <span class="mono" style="font-size: 12px; color: var(--emerald);" id="selectedSeatsSummary">2 Seats Selected</span>
+            </div>
+
+            <div class="seatmap-wrapper">
+              <svg id="venueSeatMapSvg" class="seatmap-svg" viewBox="0 0 620 280" xmlns="http://www.w3.org/2000/svg"></svg>
+              <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 8px;">
+                💡 <strong>Click any seat circle or section tier above</strong> to toggle seats in your cart. Green = Selected · Blue/Purple = Available · Red = Sold Out.
+              </div>
+            </div>
+
+            <div class="form-grid" style="margin-top: 14px;">
+              <div class="form-group">
+                <label for="checkoutQtySelect">Ticket Quantity (Max 6 per Verified Human Passkey)</label>
+                <select id="checkoutQtySelect" class="form-control">
+                  <option value="1">1 Ticket</option>
+                  <option value="2" selected>2 Tickets</option>
+                  <option value="3">3 Tickets</option>
+                  <option value="4">4 Tickets</option>
+                  <option value="6">6 Tickets (Passkey Max)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="checkoutRailSelect">Payment Settlement Rail (@openscaffold/billing)</label>
+                <select id="checkoutRailSelect" class="form-control">
+                  <option value="ach_instant_fednow" selected>Instant Bank ACH / FedNow ($0.20 Flat per Order)</option>
+                  <option value="ach_venue_absorbed">Venue Absorbs $0.20 ACH ($0.00 Fee to Fan)</option>
+                  <option value="card_passthrough_mode_a0">Apple Pay / Card Pass-Through (Exact 2.9% + 30¢ Mode A0)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 4px;">
+              <label for="checkoutHolderName">Verified Fan Name (Bound to WebAuthn Hardware Passkey)</label>
+              <input id="checkoutHolderName" type="text" class="form-control" value="Dale Raaen" />
+            </div>
+          </div>
+
+          <!-- Right Column: Side-by-Side Receipt & Commons Round-Up -->
+          <div class="panel-card">
+            <div class="panel-title">
+              <span>Step 2 · Side-by-Side All-In Receipt Comparison</span>
+              <span class="badge-zero-fee">ZERO DRIP PRICING</span>
+            </div>
+
+            <div class="receipt-comparison-grid">
+              <!-- Ticketmaster Receipt -->
+              <div class="receipt-box receipt-tm">
+                <div class="receipt-header">
+                  <span style="color: #fca5a5;">❌ Ticketmaster / Live Nation</span>
+                  <span class="mono" style="color: #fca5a5;" id="tmFeePctBadge">+39.7% Fee Tax</span>
+                </div>
+                <div class="receipt-row">
+                  <span>Face Value (<span id="tmQtyLabel">2</span>x)</span>
+                  <span class="mono" id="tmSubtotalVal">$170.00</span>
+                </div>
+                <div class="receipt-row" style="color: #fca5a5;">
+                  <span>"Service / Convenience" Fee</span>
+                  <span class="mono" id="tmServiceFeeVal">+$45.06</span>
+                </div>
+                <div class="receipt-row" style="color: #fca5a5;">
+                  <span>Venue Facility Charge</span>
+                  <span class="mono" id="tmFacilityFeeVal">+$12.00</span>
+                </div>
+                <div class="receipt-row" style="color: #fca5a5;">
+                  <span>Order Processing Fee</span>
+                  <span class="mono" id="tmOrderFeeVal">+$5.50</span>
+                </div>
+                <div class="receipt-row" style="font-size: 11px; color: var(--text-muted);">
+                  <span>StubHub / TradeDesk Broker Resale Avg</span>
+                  <span class="mono" id="tmScalperVal">$478.72</span>
+                </div>
+                <div class="receipt-total" style="color: #fca5a5;">
+                  <span>Ticketmaster Total</span>
+                  <span id="tmFinalTotalVal">$232.56</span>
+                </div>
+              </div>
+
+              <!-- Open Tickets Receipt -->
+              <div class="receipt-box receipt-ot">
+                <div class="receipt-header">
+                  <span style="color: #34d399;">✅ Open Tickets Public Utility</span>
+                  <span class="mono" style="color: #34d399;">$0.00 Fee</span>
+                </div>
+                <div class="receipt-row">
+                  <span>Face Value (<span id="otQtyLabel">2</span>x)</span>
+                  <span class="mono" id="otSubtotalVal">$170.00</span>
+                </div>
+                <div class="receipt-row" style="color: #34d399; font-weight: 700;">
+                  <span>Open Tickets Platform Fee</span>
+                  <span class="mono">$0.00</span>
+                </div>
+                <div class="receipt-row" style="color: #34d399;">
+                  <span>Order Processing / Facility Junk Fee</span>
+                  <span class="mono">$0.00</span>
+                </div>
+                <div class="receipt-row">
+                  <span id="otRailShortLabel">Wholesale Instant ACH Rail</span>
+                  <span class="mono" id="otRailFeeVal">+$0.20</span>
+                </div>
+                <div class="receipt-row" style="color: #93c5fd;">
+                  <span>Optional Internet Commons Tip</span>
+                  <span class="mono" id="otCommonsTipVal">+$1.50</span>
+                </div>
+                <div class="receipt-total" style="color: #34d399;">
+                  <span>Open Tickets Total</span>
+                  <span id="otFinalTotalVal">$171.70</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Wikipedia / Signal "Tip the Commons" Box -->
+            <div class="commons-tip-card">
+              <div style="font-size: 12.5px; font-weight: 700; color: #93c5fd;">
+                🌍 How Open Tickets Stays 100% Free on the Internet (Wikipedia / Signal Model)
+              </div>
+              <div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 4px;">
+                Open Tickets just saved you <strong id="commonsSavedHighlight" style="color: #34d399;">$62.36</strong> in Ticketmaster junk fees. Issuing your cryptographic ticket costs <code class="mono">$0.00038</code> on the edge. Leave an optional micro-tip to keep Open Tickets 100% free &amp; ad-free for every school, firehouse, band, and fan:
+              </div>
+              <div class="tip-pills" id="commonsTipPills">
+                <button class="tip-pill" data-tip="0">$0.00 (Always Free)</button>
+                <button class="tip-pill" data-tip="100">$1.00</button>
+                <button class="tip-pill active" data-tip="150">$1.50 (Covers 3,900 Tickets!)</button>
+                <button class="tip-pill" data-tip="200">$2.00</button>
+                <button class="tip-pill" data-tip="500">$5.00</button>
+              </div>
+            </div>
+
+            <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-emerald" id="btnMintTickets" style="flex: 1; justify-content: center; padding: 12px; font-size: 14px;">
+                🔐 Mint Passkey-Bound Tickets &amp; Post @openscaffold/books GL
+              </button>
+            </div>
+            <div id="mintStatusBanner" style="display: none;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: ANTI-SCALPER ROTATING TOTP QR TICKET & FACE-VALUE WAITLIST EXCHANGE -->
+      <section class="view-section" id="view-wallet">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">Anti-Scalper 30-Second Rotating TOTP QR Pass &amp; Face-Value Waitlist Exchange</h1>
+            <p class="view-subtitle">
+              Why StubHub, Viagogo, and Ticketmaster's <em>TradeDesk</em> broker bots cannot scalp an Open Ticket: every pass is bound to a hardware WebAuthn Passkey + $0.20 Bank Proof-of-Humanity token, displays a live 30-second rotating HMAC-SHA256 QR code (screenshots die in 30 seconds), and can only be returned to the official Fan Waitlist at <strong>&le; 100% of original face value</strong>.
+            </p>
+          </div>
+        </div>
+
+        <div class="two-col-grid">
+          <!-- Left: Live Rotating TOTP QR Pass -->
+          <div class="wallet-pass-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div>
+                <span class="badge-zero-fee">LIVE HARDWARE PASSKEY ENCLAVE</span>
+                <div style="font-size: 16px; font-weight: 800; margin-top: 6px;" id="walletEventTitle">
+                  Sierra Pines &amp; The Colorado Symphony
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);" id="walletVenueDate">
+                  Red Rocks Amphitheatre · Sat, Nov 14, 2026
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 11px; color: var(--text-muted);">TICKET ID</div>
+                <div class="mono" style="font-size: 13px; font-weight: 700; color: #34d399;" id="walletTicketId">TKT-RR-2026-0884</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="walletTicketSelect">Switch Active Pass in Your Wallet</label>
+              <select id="walletTicketSelect" class="form-control"></select>
+            </div>
+
+            <!-- Live 21x21 SVG QR Code Frame -->
+            <div class="qr-frame" id="walletQrFrame"></div>
+
+            <div style="text-align: center;">
+              <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700;">
+                <span>🔄 Rotating RFC-6238 HMAC-SHA256 Nonce: <code class="mono" style="color:#34d399;" id="walletTotpCode">8F4A-91C2</code></span>
+                <span class="mono" style="color: #93c5fd;" id="walletCountdownText">Rotates in 28s</span>
+              </div>
+              <div class="totp-progress-track">
+                <div class="totp-progress-fill" id="walletCountdownBar" style="width: 90%;"></div>
+              </div>
+              <div style="font-size: 11px; color: var(--text-muted);">
+                Window <code class="mono" id="walletWindowCounter">#58714560</code> · Passkey <code class="mono" id="walletPasskeyThumb">passkey:fido2:icloud-9f4a2c</code>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;">
+              <button class="btn" id="btnForceRotateQr">🔄 Force Next 30s TOTP Window</button>
+              <button class="btn btn-emerald" id="btnVerifyLiveScan">✅ Test Live Gate Scan</button>
+              <button class="btn btn-crimson" id="btnSimulateScreenshot">📸 Test Screenshot Replay (BLOCKED)</button>
+            </div>
+            <div id="gateScanResultBanner" style="display: none;"></div>
+          </div>
+
+          <!-- Right: Face-Value-Only Fan Return & Scalper Blocker -->
+          <div>
+            <div class="panel-card">
+              <div class="panel-title">
+                <span>Face-Value-Only Fan Return &amp; Waitlist Escrow Exchange</span>
+                <span class="badge-zero-fee">MAX 100% FACE VALUE</span>
+              </div>
+              <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 14px;">
+                In September 2025, the FTC and 7 states sued Ticketmaster for giving scalper brokers <strong>TradeDesk</strong> software to harvest hundreds of thousands of tickets and resell them at massive markups so Ticketmaster could collect a second round of fees. On Open Tickets, <strong>secondary scalping is mathematically impossible</strong>:
+              </p>
+
+              <div class="kpi-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 14px;">
+                <div class="kpi-card">
+                  <div class="kpi-label">Original Face Value Paid</div>
+                  <div class="kpi-value" id="transferOriginalFaceVal">$85.00</div>
+                  <div class="kpi-sub">Holder: <span id="transferHolderName">Dale Raaen</span></div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-label">Protocol Max Transfer Price</div>
+                  <div class="kpi-value" style="color: var(--emerald);" id="transferMaxAllowedVal">$85.00</div>
+                  <div class="kpi-sub">SQL &amp; Enclave Constraint: &le; 100%</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="transferRecipientInput">Next Verified Human in Fan Waitlist Queue</label>
+                <input id="transferRecipientInput" type="text" class="form-control" value="Maya Lin (Waitlist #1 · Passkey + $0.20 Bank Verified)" />
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+                <button class="btn btn-emerald" id="btnReturnFaceValue" style="justify-content: center; padding: 11px;">
+                  🤝 Can't Make the Show? Return to Fan Waitlist at Exact Face Value ($0 Fee)
+                </button>
+                <button class="btn btn-crimson" id="btnSimulateScalperMarkup" style="justify-content: center; padding: 11px;">
+                  🚫 Attempt StubHub / Broker Scalper Markup ($250.00 on $85.00 Ticket) — BLOCKED
+                </button>
+              </div>
+
+              <div id="transferResultBanner" style="display: none;"></div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-title">
+                <span>Zero-Bot Queue &amp; Proof-of-Humanity Architecture</span>
+                <span class="badge-zero-fee">NO INVASIVE BIOMETRICS</span>
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Attack Vector</th>
+                    <th>Legacy Ticketmaster</th>
+                    <th>Open Tickets Public Utility</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>10,000-Account Broker Bot Farms</strong></td>
+                    <td style="color:#fca5a5;">5 brokers held 6,345 accounts &amp; 246,407 tickets (FTC Compl. ¶42)</td>
+                    <td style="color:#34d399;"><strong>1 Human = 1 FIDO2 Hardware Passkey + $0.20 Verified Bank Token</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Static PDF / Screenshot Resale</strong></td>
+                    <td style="color:#fca5a5;">Barcodes copied &amp; resold across multiple secondary sites</td>
+                    <td style="color:#34d399;"><strong>30s Rotating HMAC-SHA256 TOTP QR</strong> (screenshots expire in 30s)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>300% Secondary Price Gouging</strong></td>
+                    <td style="color:#fca5a5;">Ticketmaster profits twice via resale fees</td>
+                    <td style="color:#34d399;"><strong>100% Face-Value Protocol Cap</strong> (instant waitlist escrow return only)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: 60-SECOND VENUE / ARTIST / COMMUNITY EVENT CREATOR & @OPENSCAFFOLD/BOOKS GL BRIDGE -->
+      <section class="view-section" id="view-creator">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">60-Second Event Creator, Seating Builder &amp; @openscaffold/books v3.0 GL Bridge</h1>
+            <p class="view-subtitle">
+              Total convenience and end-to-end integration: whether you run an independent amphitheatre, a high school athletic department, an <code>OpenRestaurant</code> chef's table, an <code>OpenGolfCourseOS</code> tournament, or an <code>OpenFirehouse</code> pancake breakfast, launch your event in 60 seconds with direct daily payouts and zero manual QuickBooks entry.
+            </p>
+          </div>
+        </div>
+
+        <div class="two-col-grid">
+          <!-- Left: 60-Second Event Creator Form -->
+          <div class="panel-card">
+            <div class="panel-title">
+              <span>Create &amp; Federate a Zero-Fee Event in 60 Seconds</span>
+              <span class="badge-zero-fee">INSTANT EDGE PUBLISH</span>
+            </div>
+
+            <div class="form-group">
+              <label for="createEventTitle">Event Title</label>
+              <input id="createEventTitle" type="text" class="form-control" value="Redwood Valley Lions Club &amp; VFD Harvest Barn Dance" />
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="createEventVenue">Venue / Location Name</label>
+                <input id="createEventVenue" type="text" class="form-control" value="Redwood Civic Pavilion" />
+              </div>
+              <div class="form-group">
+                <label for="createEventCity">City &amp; State</label>
+                <input id="createEventCity" type="text" class="form-control" value="Healdsburg, CA" />
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="createEventVertical">Open Scaffold Vertical Integration</label>
+                <select id="createEventVertical" class="form-control">
+                  <option value="OpenTickets Standalone (Concerts, Sports &amp; Arenas)">OpenTickets Standalone (Concerts, Sports &amp; Arenas)</option>
+                  <option value="OpenRestaurant (Chef Tables, Wine Dinners &amp; Pop-Ups)">OpenRestaurant (Chef Tables, Wine Dinners &amp; Pop-Ups)</option>
+                  <option value="OpenGolfCourseOS (Charity Scrambles, Member-Guest &amp; Gallery Passes)">OpenGolfCourseOS (Charity Scrambles &amp; Tournaments)</option>
+                  <option value="OpenFirehouse (Pancake Breakfasts, Beef &amp; Beer &amp; Auxiliary Benefits)" selected>OpenFirehouse (Pancake Breakfasts &amp; Department Benefits)</option>
+                  <option value="OpenChurch (Holiday Concerts, Youth Retreats &amp; Conferences)">OpenChurch (Concerts, Retreats &amp; Parish Events)</option>
+                  <option value="OpenHOA (Community Festivals, Pool Passes &amp; Amphitheater Nights)">OpenHOA (Community Festivals &amp; Clubhouses)</option>
+                  <option value="High School &amp; Youth Athletics (State Championships &amp; Friday Night Lights)">High School &amp; Youth Athletics (Friday Night Lights)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="createEventDate">Event Date &amp; Time Label</label>
+                <input id="createEventDate" type="text" class="form-control" value="Sat, Nov 28, 2026 · 6:00 PM PT" />
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="createEventPrice">Standard Face Value ($ USD)</label>
+                <input id="createEventPrice" type="number" class="form-control" value="35" min="0" step="1" />
+              </div>
+              <div class="form-group">
+                <label for="createEventCapacity">Total Venue Capacity</label>
+                <input id="createEventCapacity" type="number" class="form-control" value="400" min="10" step="10" />
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 6px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input id="createEventAbsorbAch" type="checkbox" checked />
+                <span>Venue absorbs flat $0.20 ACH rail so fans pay <strong>exact face value ($0.00 total fees)</strong></span>
+              </label>
+            </div>
+
+            <button class="btn btn-emerald" id="btnPublishEvent" style="width: 100%; justify-content: center; padding: 11px; margin-top: 10px;">
+              🚀 Publish Event to Open Tickets &amp; Generate @openscaffold/books GL Journal
+            </button>
+
+            <div id="createEventStatusBanner" style="display: none;"></div>
+          </div>
+
+          <!-- Right: Live @openscaffold/books v3.0 Double-Entry GL Journal & Federated Manifest -->
+          <div>
+            <div class="panel-card">
+              <div class="panel-title">
+                <span>Automated @openscaffold/books v3.0 Double-Entry GL Bridge</span>
+                <span class="badge-zero-fee">ZERO QUICKBOOKS TAX</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px;">
+                Every ticket minted on Open Tickets automatically posts a balanced ASC 606 double-entry journal directly into <code>@openscaffold/books</code> v3.0 and <code>OpenCPA 2.0</code>—eliminating CSV exports and QuickBooks data entry:
+              </p>
+              <table class="data-table" id="booksJournalTable">
+                <thead>
+                  <tr>
+                    <th>Acct</th>
+                    <th>Account Name &amp; Memo</th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                  </tr>
+                </thead>
+                <tbody id="booksJournalTbody"></tbody>
+              </table>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-title">
+                <span>Federated Edge Manifest (<code>/.well-known/open-tickets.json</code>)</span>
+                <a href="/.well-known/open-tickets.json" target="_blank" class="btn" style="padding: 4px 9px; font-size: 11px;">Open Live JSON ↗</a>
+              </div>
+              <pre id="wellKnownPre" class="mono" style="background:#090d16; padding:12px; border-radius:8px; font-size:11px; color:#6ee7b7; overflow-x:auto; max-height:220px;"></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: HOW IT'S FREE & SUPPORTED BY THE INTERNET (SUSTAINABILITY CALCULATOR & ANTITRUST BLUEPRINT) -->
+      <section class="view-section" id="view-blueprint">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">How We Build a Free Ticketmaster Supported by the Internet</h1>
+            <p class="view-subtitle">
+              Answering Dale's core architectural question: how Open Tickets charges <strong>$0.00 in mandatory platform fees forever</strong> while staying 100% self-sustaining on the open internet—combining <code class="mono">$0.00038</code> edge cryptography, <code class="mono">$0.20</code> wholesale bank rails, the Wikipedia/Signal voluntary commons round-up, and total integration across all 12 Open Scaffold Labs verticals.
+            </p>
+          </div>
+        </div>
+
+        <!-- Interactive Commons Sustainability Simulator -->
+        <div class="panel-card">
+          <div class="panel-title">
+            <span>Interactive Open-Internet Commons Sustainability Simulator</span>
+            <span class="badge-zero-fee" id="sustStatusBadge">100% SELF-SUSTAINING PUBLIC UTILITY</span>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 16px;">
+            <div class="form-group">
+              <label for="simMonthlyTickets">Monthly Tickets Issued: <strong class="mono" id="simTicketsVal">250,000</strong></label>
+              <input id="simMonthlyTickets" type="range" min="10000" max="2000000" step="10000" value="250000" />
+            </div>
+            <div class="form-group">
+              <label for="simOptInPct">Wikipedia/Signal Tip Opt-In %: <strong class="mono" id="simOptInVal">14%</strong></label>
+              <input id="simOptInPct" type="range" min="2" max="30" step="1" value="14" />
+            </div>
+            <div class="form-group">
+              <label for="simAvgTip">Average Voluntary Tip: <strong class="mono" id="simAvgTipVal">$1.50</strong></label>
+              <input id="simAvgTip" type="range" min="50" max="500" step="25" value="150" />
+            </div>
+            <div class="form-group">
+              <label for="simProVenues">Stadiums on Pro Box-Office OS ($99/mo): <strong class="mono" id="simProVenuesVal">45</strong></label>
+              <input id="simProVenues" type="range" min="0" max="500" step="5" value="45" />
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Monthly Edge Compute Cost</div>
+              <div class="kpi-value" id="simInfraCost">$215</div>
+              <div class="kpi-sub">$0.00038 / ticket (Cloudflare/Vercel Edge + WebCrypto)</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Voluntary Commons Micro-Tips</div>
+              <div class="kpi-value" style="color: var(--emerald);" id="simCommonsRev">$23,864</div>
+              <div class="kpi-sub" id="simTippingOrdersSub">15,909 fan orders tipping $1.50 after saving $34+</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Infrastructure Coverage Ratio</div>
+              <div class="kpi-value" style="color: #93c5fd;" id="simCoverageRatio">131.7x</div>
+              <div class="kpi-sub">Net Monthly Surplus: <strong id="simNetSurplus">+$28,104/mo</strong></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Junk Fees Saved for Fans / Yr</div>
+              <div class="kpi-value" style="color: #34d399;" id="simAnnualFanSavings">$42.6M/yr</div>
+              <div class="kpi-sub">Money kept in fans', artists', and communities' pockets</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The 5 Pillars + Antitrust Tailwinds -->
+        <div class="two-col-grid">
+          <div class="panel-card">
+            <div class="panel-title">
+              <span>The 5 Pillars of a Free Internet-Supported Ticketmaster Replacement</span>
+            </div>
+            <div id="pillarsContainer" style="display: flex; flex-direction: column; gap: 12px;"></div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-title">
+              <span>2025–2026 Federal Antitrust &amp; FTC Junk-Fee Regulatory Tailwinds</span>
+              <span class="badge-zero-fee">MONOPOLY BREAKUP</span>
+            </div>
+            <div id="tailwindsContainer" style="display: flex; flex-direction: column; gap: 12px;"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 4-Step Tour Modal -->
+  <div class="modal-backdrop" id="tourModal">
+    <div class="modal-card">
+      <div class="panel-title">
+        <span>❓ How Open Tickets Replaces Ticketmaster for $0.00</span>
+        <button class="btn" id="btnCloseTour">✕ Close</button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13px; color: var(--text-secondary);">
+        <div>
+          <strong style="color:#34d399;">1. Wholesale Pass-Through Payment Rails ($0.00 Platform Fee):</strong>
+          Ticketmaster extracts 25%–44% in service, facility, and order processing fees ($16.4B from 2019–2024). Open Tickets charges <strong>$0.00 forever</strong> and routes fan payments directly to the venue or artist daily via <code>@openscaffold/billing</code> ($0.20 flat Instant ACH or pass-through Mode A0 card interchange).
+        </div>
+        <div>
+          <strong style="color:#34d399;">2. Supported by the Internet (Wikipedia / Signal Commons Model + Edge Federation):</strong>
+          Issuing a WebCrypto passkey ticket costs <code>$0.00038</code>. When fans see Open Tickets saved them $34+ in Ticketmaster junk fees at checkout, an optional $1–$2 "Tip the Open Internet Commons" round-up from just 12%–15% of buyers funds global infrastructure over 100x over.
+        </div>
+        <div>
+          <strong style="color:#34d399;">3. Cryptographic Anti-Scalper Lock (30s Rotating TOTP QR + 100% Face-Value Waitlist):</strong>
+          Every ticket is bound to a hardware WebAuthn Passkey + $0.20 bank proof-of-humanity token and displays a 30-second rotating HMAC-SHA256 QR code. Screenshots expire in 30 seconds, and tickets can only be returned to the official Fan Waitlist at &le; 100% of original face value.
+        </div>
+        <div>
+          <strong style="color:#34d399;">4. Total Integration Across All 12 Open Scaffold Verticals + @openscaffold/books v3.0:</strong>
+          Built natively into <code>OpenRestaurant</code>, <code>OpenGolfCourseOS</code>, <code>OpenChurch</code>, <code>OpenFirehouse</code>, <code>OpenHOA</code>, and <code>OpenCPA 2.0</code> with automatic balanced double-entry accounting.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ask Open Tickets AI Modal -->
+  <div class="modal-backdrop" id="aiModal">
+    <div class="modal-card">
+      <div class="panel-title">
+        <span>✨ Ask Open Tickets Role-Specific AI Co-Pilot</span>
+        <button class="btn" id="btnCloseAi">✕ Close</button>
+      </div>
+      <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 12px;">
+        Role-specific AI convenience for Fans, Venue Managers, Performers, School Athletic Directors, Firehouse Treasurers, and CPAs:
+      </p>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+        <button class="btn ai-prompt-btn" data-prompt="How does Open Tickets stay free without ads or venture burn?">How does it stay free?</button>
+        <button class="btn ai-prompt-btn" data-prompt="How do 30-second rotating TOTP QR codes and passkeys stop StubHub scalpers?">How do we stop scalper bots?</button>
+        <button class="btn ai-prompt-btn" data-prompt="How does Open Tickets integrate with @openscaffold/books v3.0 and OpenCPA?">How does accounting work?</button>
+      </div>
+      <div id="aiResponseBox" class="panel-card" style="background:#090d16; font-size:13px; color:var(--text-primary); margin-bottom:0;">
+        Select a question above to see the instant architectural breakdown.
+      </div>
+    </div>
+  </div>
+
+  <!-- Connect Grok Bot / MCP Modal -->
+  <div class="modal-backdrop" id="mcpModal">
+    <div class="modal-card">
+      <div class="panel-title">
+        <span>🔌 Connect Your Grok Bot &amp; Federated Event Discovery</span>
+        <button class="btn" id="btnCloseMcp">✕ Close</button>
+      </div>
+      <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 10px;">
+        Every Open Tickets venue exposes a standard <code>/.well-known/open-tickets.json</code> manifest and MCP tools so any fan's Grok Bot can find face-value tickets and check out with zero junk fees:
+      </p>
+      <pre id="mcpToolsPre" class="mono" style="background:#090d16; padding:12px; border-radius:8px; font-size:11.5px; color:#93c5fd; overflow-x:auto;"></pre>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
